@@ -35,6 +35,8 @@
 
 	export let selectedToolIds = [];
 	export let imageGenerationEnabled = false;
+	export let videoGenerationEnabled = false;
+	videoGenerationEnabled = false;
 	export let codeInterpreterEnabled = false;
 	export let webSearchEnabled = false;
 
@@ -193,6 +195,7 @@
 					bind:autoScroll
 					bind:selectedToolIds
 					bind:imageGenerationEnabled
+					bind:videoGenerationEnabled
 					bind:codeInterpreterEnabled
 					bind:webSearchEnabled
 					bind:atSelectedModel

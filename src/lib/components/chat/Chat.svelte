@@ -117,6 +117,7 @@
 
 	let selectedToolIds = [];
 	let imageGenerationEnabled = false;
+	let videoGenerationEnabled = false;
 	let webSearchEnabled = false;
 	let codeInterpreterEnabled = false;
 	let chat = null;
@@ -2028,6 +2029,7 @@
 								bind:autoScroll
 								bind:selectedToolIds
 								bind:imageGenerationEnabled
+								bind:videoGenerationEnabled
 								bind:codeInterpreterEnabled
 								bind:webSearchEnabled
 								bind:atSelectedModel
@@ -2080,6 +2082,7 @@
 								bind:autoScroll
 								bind:selectedToolIds
 								bind:imageGenerationEnabled
+								bind:videoGenerationEnabled
 								bind:codeInterpreterEnabled
 								bind:webSearchEnabled
 								bind:atSelectedModel
