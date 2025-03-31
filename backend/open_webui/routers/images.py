@@ -32,7 +32,7 @@ IMAGE_CACHE_DIR.mkdir(parents=True, exist_ok=True)
 router = APIRouter()
 
 
-@router.get("/config")
+@router.get("/images/config")
 async def get_config(request: Request, user=Depends(get_admin_user)):
     return {
         "enabled": request.app.state.config.ENABLE_IMAGE_GENERATION,
@@ -97,7 +97,7 @@ class ConfigForm(BaseModel):
     gemini: GeminiConfigForm
 
 
-@router.post("/config/update")
+@router.post("/images/config/update")
 async def update_config(
     request: Request, form_data: ConfigForm, user=Depends(get_admin_user)
 ):
@@ -191,7 +191,7 @@ def get_automatic1111_api_auth(request: Request):
         return f"Basic {auth1111_base64_encoded_string}"
 
 
-@router.get("/config/url/verify")
+@router.get("/images/config/url/verify")
 async def verify_url(request: Request, user=Depends(get_admin_user)):
     if request.app.state.config.IMAGE_GENERATION_ENGINE == "automatic1111":
         try:
@@ -326,7 +326,7 @@ async def update_image_config(
     }
 
 
-@router.get("/models")
+@router.get("/images/models")
 def get_models(request: Request, user=Depends(get_verified_user)):
     try:
         if request.app.state.config.IMAGE_GENERATION_ENGINE == "openai":
@@ -464,7 +464,7 @@ def upload_image(request, image_metadata, image_data, content_type, user):
     return url
 
 
-@router.post("/generations")
+@router.post("/images/generations")
 async def image_generations(
     request: Request,
     form_data: GenerateImageForm,

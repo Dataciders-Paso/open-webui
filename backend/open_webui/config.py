@@ -972,6 +972,11 @@ USER_PERMISSIONS_FEATURES_IMAGE_GENERATION = (
     == "true"
 )
 
+USER_PERMISSIONS_FEATURES_VIDEO_GENERATION = (
+    os.environ.get("USER_PERMISSIONS_FEATURES_VIDEO_GENERATION", "True").lower()
+    == "true"
+)
+
 USER_PERMISSIONS_FEATURES_CODE_INTERPRETER = (
     os.environ.get("USER_PERMISSIONS_FEATURES_CODE_INTERPRETER", "True").lower()
     == "true"
@@ -2281,6 +2286,42 @@ IMAGE_GENERATION_MODEL = PersistentConfig(
     "IMAGE_GENERATION_MODEL",
     "image_generation.model",
     os.getenv("IMAGE_GENERATION_MODEL", ""),
+)
+
+####################################
+# Video
+####################################
+
+VIDEO_GENERATION_ENGINE = PersistentConfig(
+    "VIDEO_GENERATION_ENGINE",
+    "video_generation.engine",
+    os.getenv("VIDEO_GENERATION_ENGINE", "openai"),
+)
+
+ENABLE_VIDEO_GENERATION = PersistentConfig(
+    "ENABLE_VIDEO_GENERATION",
+    "video_generation.enable",
+    os.environ.get("ENABLE_VIDEO_GENERATION", "").lower() == "true",
+)
+
+ENABLE_VIDEO_PROMPT_GENERATION = PersistentConfig(
+    "ENABLE_VIDEO_PROMPT_GENERATION",
+    "video_generation.prompt.enable",
+    os.environ.get("ENABLE_VIDEO_PROMPT_GENERATION", "true").lower() == "true",
+)
+
+VIDEO_SIZE = PersistentConfig(
+    "VIDEO_SIZE", "video_generation.size", os.getenv("VIDEO_SIZE", "512x512")
+)
+
+VIDEO_STEPS = PersistentConfig(
+    "VIDEO_STEPS", "video_generation.steps", int(os.getenv("VIDEO_STEPS", 50))
+)
+
+VIDEO_GENERATION_MODEL = PersistentConfig(
+    "VIDEO_GENERATION_MODEL",
+    "video_generation.model",
+    os.getenv("VIDEO_GENERATION_MODEL", ""),
 )
 
 ####################################

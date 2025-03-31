@@ -84,6 +84,7 @@ log_sources = [
     "CONFIG",
     "DB",
     "IMAGES",
+    "VIDEOS",
     "MAIN",
     "MODELS",
     "OLLAMA",

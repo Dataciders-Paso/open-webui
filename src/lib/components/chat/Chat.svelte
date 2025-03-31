@@ -117,6 +117,7 @@
 
 	let selectedToolIds = [];
 	let imageGenerationEnabled = false;
+	let videoGenerationEnabled = false;
 	let webSearchEnabled = false;
 	let codeInterpreterEnabled = false;
 	let chat = null;
@@ -145,6 +146,7 @@
 			selectedToolIds = [];
 			webSearchEnabled = false;
 			imageGenerationEnabled = false;
+			videoGenerationEnabled = false;
 
 			if (chatIdProp && (await loadChat())) {
 				await tick();
@@ -159,6 +161,7 @@
 						selectedToolIds = input.selectedToolIds;
 						webSearchEnabled = input.webSearchEnabled;
 						imageGenerationEnabled = input.imageGenerationEnabled;
+						videoGenerationEnabled = input.videoGenerationEnabled;
 					} catch (e) {}
 				}
 
@@ -416,12 +419,14 @@
 				selectedToolIds = input.selectedToolIds;
 				webSearchEnabled = input.webSearchEnabled;
 				imageGenerationEnabled = input.imageGenerationEnabled;
+				videoGenerationEnabled = input.videoGenerationEnabled;
 			} catch (e) {
 				prompt = '';
 				files = [];
 				selectedToolIds = [];
 				webSearchEnabled = false;
 				imageGenerationEnabled = false;
+				videoGenerationEnabled = false;
 			}
 		}
 
@@ -726,6 +731,10 @@
 
 		if ($page.url.searchParams.get('image-generation') === 'true') {
 			imageGenerationEnabled = true;
+		}
+
+		if ($page.url.searchParams.get('video-generation') === 'true') {
+			videoGenerationEnabled = true;
 		}
 
 		if ($page.url.searchParams.get('tools')) {
@@ -1570,6 +1579,11 @@
 						($user.role === 'admin' || $user?.permissions?.features?.image_generation)
 							? imageGenerationEnabled
 							: false,
+					video_generation:
+						$config?.features?.enable_video_generation &&
+						($user.role === 'admin' || $user?.permissions?.features?.image_generation)
+							? videoGenerationEnabled
+							: false,
 					code_interpreter:
 						$config?.features?.enable_code_interpreter &&
 						($user.role === 'admin' || $user?.permissions?.features?.code_interpreter)
@@ -2028,6 +2042,7 @@
 								bind:autoScroll
 								bind:selectedToolIds
 								bind:imageGenerationEnabled
+								bind:videoGenerationEnabled
 								bind:codeInterpreterEnabled
 								bind:webSearchEnabled
 								bind:atSelectedModel
@@ -2080,6 +2095,7 @@
 								bind:autoScroll
 								bind:selectedToolIds
 								bind:imageGenerationEnabled
+								bind:videoGenerationEnabled
 								bind:codeInterpreterEnabled
 								bind:webSearchEnabled
 								bind:atSelectedModel

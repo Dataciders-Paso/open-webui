@@ -71,6 +71,7 @@
 	export let selectedToolIds = [];
 
 	export let imageGenerationEnabled = false;
+	export let videoGenerationEnabled = false;
 	export let webSearchEnabled = false;
 	export let codeInterpreterEnabled = false;
 
@@ -79,6 +80,7 @@
 		files,
 		selectedToolIds,
 		imageGenerationEnabled,
+		videoGenerationEnabled,
 		webSearchEnabled
 	});
 

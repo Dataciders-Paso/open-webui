@@ -55,6 +55,7 @@ from open_webui.socket.main import (
 from open_webui.routers import (
     audio,
     images,
+    videos,
     ollama,
     openai,
     retrieval,
@@ -140,6 +141,13 @@ from open_webui.config import (
     IMAGES_OPENAI_API_KEY,
     IMAGES_GEMINI_API_BASE_URL,
     IMAGES_GEMINI_API_KEY,
+    # Video
+    ENABLE_VIDEO_GENERATION,
+    ENABLE_VIDEO_PROMPT_GENERATION,
+    VIDEO_GENERATION_ENGINE,
+    VIDEO_GENERATION_MODEL,
+    VIDEO_SIZE,
+    VIDEO_STEPS,
     # Audio
     AUDIO_STT_ENGINE,
     AUDIO_STT_MODEL,
@@ -716,6 +724,19 @@ app.state.config.COMFYUI_WORKFLOW_NODES = COMFYUI_WORKFLOW_NODES
 app.state.config.IMAGE_SIZE = IMAGE_SIZE
 app.state.config.IMAGE_STEPS = IMAGE_STEPS
 
+########################################
+#
+# VIDEOS
+#
+########################################
+app.state.config.VIDEO_GENERATION_ENGINE = VIDEO_GENERATION_ENGINE
+app.state.config.ENABLE_VIDEO_GENERATION = ENABLE_VIDEO_GENERATION
+app.state.config.ENABLE_VIDEO_PROMPT_GENERATION = ENABLE_VIDEO_PROMPT_GENERATION
+
+app.state.config.VIDEO_GENERATION_MODEL = VIDEO_GENERATION_MODEL
+
+app.state.config.VIDEO_SIZE = VIDEO_SIZE
+app.state.config.VIDEO_STEPS = VIDEO_STEPS
 
 ########################################
 #
@@ -873,6 +894,7 @@ app.include_router(openai.router, prefix="/openai", tags=["openai"])
 app.include_router(pipelines.router, prefix="/api/v1/pipelines", tags=["pipelines"])
 app.include_router(tasks.router, prefix="/api/v1/tasks", tags=["tasks"])
 app.include_router(images.router, prefix="/api/v1/images", tags=["images"])
+app.include_router(videos.router, prefix="/api/v1/videos", tags=["videos"])
 
 app.include_router(audio.router, prefix="/api/v1/audio", tags=["audio"])
 app.include_router(retrieval.router, prefix="/api/v1/retrieval", tags=["retrieval"])
@@ -1178,6 +1200,7 @@ async def get_app_config(request: Request):
                     "enable_code_execution": app.state.config.ENABLE_CODE_EXECUTION,
                     "enable_code_interpreter": app.state.config.ENABLE_CODE_INTERPRETER,
                     "enable_image_generation": app.state.config.ENABLE_IMAGE_GENERATION,
+                    "enable_video_generation": app.state.config.ENABLE_VIDEO_GENERATION,
                     "enable_autocomplete_generation": app.state.config.ENABLE_AUTOCOMPLETE_GENERATION,
                     "enable_community_sharing": app.state.config.ENABLE_COMMUNITY_SHARING,
                     "enable_message_rating": app.state.config.ENABLE_MESSAGE_RATING,
